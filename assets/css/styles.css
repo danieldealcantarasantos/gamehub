@@ -603,7 +603,7 @@ i.far.fa-circle.fa-dot-circle, i.far.fa-dot-circle {
   z-index: 1; /* Coloca o gamepad atrás do conteúdo */
   width: 150px; /* Tamanho considerável do controle */
   height: 150px; /* Tamanho considerável do controle */
-  background-image: url('gamehub/assets/img/section-4/gamepad-controler.png'); /* Caminho da imagem */
+  background-image: url('/gamehub/assets/img/section-4/gamepad-controler.png'); /* Caminho da imagem */
   background-size: contain; /* Ajusta a imagem para o tamanho */
   background-repeat: no-repeat;
   background-position: center;
