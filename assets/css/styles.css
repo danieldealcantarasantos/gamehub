@@ -1,0 +1,902 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,200..1000&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+  --card-width: 190px; /* Largura do cartão */
+  --spacing: 10px; /* Espaçamento entre os cartões */
+  --num-cards: 4; /* Número total de cartões */
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsla(120, 61%, 50%, 1);
+  --title-color: hsl(228, 18%, 16%);
+  --text-color: hsl(228, 8%, 56%);
+  --icon-color: hsl(228, 0%, 0%, 1);
+  --body-color: hsl(228, 0%, 95%, 1);
+  --shadow-color: hsl(228, 80%, 4%, .1);
+  --hero-title-color: hsl(228, 0%, 0%, 1);
+  --hero-subtitle-color: hsl(228, 24%, 16%);
+  --animated-button-background-color: transparent;
+  --animated-button-hover-border-color: var(--body-color);
+  --title2-color: hsla(269, 0%, 100%, 1);
+  --search-bar-border-color: hsla(269, 85%, 38%, 0.7);
+
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Nunito Sans", system-ui;
+  --normal-font-size: .938rem;
+  --smaller-font-size: .75rem;
+  --tiny-font-size: .75rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-semi-bold: 600;
+  
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1150px) {
+  :root {
+    --normal-font-size: 1rem;
+    --smaller-font-size: .813rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  color: var(--text-color);
+  transition: background-color .4s;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita margens invisíveis laterais */
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  all: unset;
+}
+
+/*========== VARIABLES DARK THEME ===========*/
+body.dark-theme {
+  --first-color: hsla(120, 61%, 50%, 1);
+  --title-color: hsl(228, 18%, 96%);
+  --text-color: hsl(228, 12%, 61%);
+  --body-color: hsl(228, 24%, 16%);
+  --shadow-color: hsl(228, 80%, 4%, .3);
+  --hero-title-color: hsl(0, 0%, 100%);
+  --hero-subtitle-color: hsl(0, 0%, 60%);
+  --animated-button-background-color: transparent;
+  --animated-button-hover-border-color: transparent;
+  --title2-color: hsl(0, 0%, 98%, 1);
+  --search-bar-border-color: hsla(228, 100%, 100%, 1);
+
+}
+
+/*===== Color changes in some parts of 
+	the website, in dark theme =====*/
+.dark-theme .sidebar__content::-webkit-scrollbar {
+  background-color: hsla(228, 16%, 30%, 1);
+}
+
+.dark-theme .sidebar__content::-webkit-scrollbar-thumb {
+  background-color: var(--first-color);
+}
+
+/*========== REUSABLE CSS CLASSES ==========*/
+.container {
+  
+}
+
+.main {
+  padding-top: 5rem;
+}
+
+main .directory-link {
+  margin-bottom: 10px;
+  color: var(--first-color);
+}
+
+/*=============== HEADER ===============*/
+.header {
+  position: fixed;
+  max-width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-fixed);
+  margin: .75rem;
+}
+
+.header__container {
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--body-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1.5rem;
+  border-radius: 1rem;
+  transition: background-color .4s;
+}
+
+.header__logo {
+  display: inline-flex;
+  align-items: center;
+  column-gap: .25rem;
+}
+
+.header__logo i {
+  font-size: 1.5rem;
+  color: var(--first-color);
+}
+
+.header__logo span {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+}
+
+.header__toggle {
+  font-size: 1.5rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+
+ #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background-color: hsla(120, 61%, 50%, 1);
+      z-index: 9999;
+}
+
+/*=============== SIDEBAR ===============*/
+.sidebar {
+  position: fixed;
+  left: -120%;
+  top: 0;
+  bottom: 0;
+  z-index: var(--z-fixed);
+  width: 288px ;
+  background-color: var(--body-color);
+  box-shadow: 2px 0 24px var(--shadow-color);
+  padding-block: 1.5rem;
+  margin: .75rem;
+  border-radius: 1rem;
+  transition: left .4s, background-color .4s, width .4s;
+}
+
+.sidebar__container, 
+.sidebar__content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.2rem;
+}
+
+.sidebar__container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.sidebar__user {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  align-items: center;
+  column-gap: 1rem;
+  padding-left: 2rem;
+}
+
+.sidebar__img {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: var(--first-color);
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  justify-items: center;
+}
+
+.sidebar__img img {
+  position: absolute;
+  width: 36px;
+  bottom: -1px;
+}
+
+.sidebar__info h3 {
+  font-size: var(--normal-font-size);
+  color: var(--title-color);
+  transition: color .4s;
+}
+
+.sidebar__info span {
+  font-size: var(--smaller-font-size);
+}
+
+.sidebar__content {
+  overflow: hidden auto;
+}
+
+.sidebar__content::-webkit-scrollbar {
+  width: .4rem;
+  background-color: hsl(228, 8%, 85%);
+}
+
+.sidebar__content::-webkit-scrollbar-thumb {
+  background-color: var(--first-color);
+}
+
+.sidebar__title {
+  width: max-content;
+  font-size: var(--tiny-font-size);
+  font-weight: var(--font-semi-bold);
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar__list, 
+.sidebar__actions {
+  display: grid;
+  row-gap: 1rem;
+}
+
+.sidebar__link {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  align-items: center;
+  column-gap: 1rem;
+  color: var(--text-color);
+  padding-left: 2rem;
+  transition: color .4s, opacity .4s;
+}
+
+.sidebar__link i {
+  font-size: 1.25rem;
+}
+
+.sidebar__link span {
+  font-weight: var(--font-semi-bold);
+}
+
+.sidebar__link:hover {
+  color: var(--first-color);
+}
+
+.sidebar__actions {
+  margin-top: auto;
+}
+
+.sidebar__actions button {
+  cursor: pointer;
+}
+
+.sidebar__theme {
+  width: 100%;
+  font-size: 1.25rem;
+}
+
+.sidebar__theme span {
+  font-size: var(--normal-font-size);
+  font-family: var(--body-font);
+}
+
+/* Show sidebar */
+.show-sidebar {
+  left: 0;
+}
+
+/* Active link */
+.active-link {
+  color: var(--first-color);
+}
+
+.active-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 3px;
+  height: 20px;
+  background-color: var(--first-color);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 360px) {
+  .header__container {
+    padding-inline: 1rem;
+  }
+
+  .sidebar {
+    width: max-content;
+  }
+  .sidebar__info, 
+  .sidebar__link span {
+    display: none;
+  }
+  .sidebar__user, 
+  .sidebar__list, 
+  .sidebar__actions {
+    justify-content: center;
+  }
+  .sidebar__user, 
+  .sidebar__link {
+    grid-template-columns: max-content;
+  }
+  .sidebar__user {
+    padding: 0;
+  }
+  .sidebar__link {
+    padding-inline: 2rem;
+  }
+  .sidebar__title {
+    padding-inline: .4rem;
+    margin-inline: auto;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1150px) {
+  .header {
+    margin: 1rem;
+    padding-left: 340px;
+    transition: padding .4s;
+  }
+  .header__container {
+    height: calc(var(--header-height) + 2rem);
+    padding-inline: 2rem;
+  }
+  .header__logo {
+    order: 1;
+  }
+
+  .sidebar {
+    left: 0;
+    width: 316px;
+    margin: 1rem;
+  }
+  .sidebar__info, 
+  .sidebar__link span {
+    transition: opacity .4s;
+  }
+  .sidebar__user, 
+  .sidebar__title {
+    transition: padding .4s;
+  }
+
+  /* Reduce sidebar */
+  .show-sidebar {
+    width: 90px;
+  }
+  .show-sidebar .sidebar__user {
+    padding-left: 1.25rem;
+  }
+  .show-sidebar .sidebar__title {
+    padding-left: 0;
+    margin-inline: auto;
+  }
+  .show-sidebar .sidebar__info, 
+  .show-sidebar .sidebar__link span {
+    opacity: 0;
+  }
+
+  .main {
+    padding-top: 8rem;
+    transition: padding .4s;
+  }
+
+  /* Add padding left */
+  .left-pd {
+    padding-left: 114px;
+  }
+}
+
+/*============== LEADING PAGE ==============*/
+
+
+/*================ SEÇÃO 2 =================*/
+
+.title2 {
+  justify-self: center; 
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--title2-color);
+}
+
+/* Estilo da Seção 2 */
+.section-2 {
+  background-color: hsla(269, 85%, 38%, 1);
+  max-width: 100%;
+  width: 100vw; /* Preenche toda a largura da viewport */
+  height: auto; /* Preenche toda a altura da viewport */
+  padding: 2rem;
+  display: flex;
+  justify-content: top; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  flex-direction: column;
+  box-sizing: border-box; /* Garante que padding não afete as dimensões */
+}
+
+/* Container da Grade */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 5px 1fr 5px 1fr; /* 3 grupos + 2 linhas verticais */
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* Grupos de Ícone + Texto */
+.grid-group {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-group i {
+  width: 80px;
+  height: auto;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.grid-group p {
+  margin: 0;
+  font-size: 1rem;
+  color: white;
+  line-height: 1;
+}
+
+/* Linhas Verticais */
+.grid-divider-vertical {
+  width: 2px;
+  border-radius: 10px;
+  background-color: hsla(269, 0%, 0%, 0.3);
+  height: 100%; /* Preenche a altura disponível */
+}
+
+/*================ SEÇÃO 3 =================*/
+.slider {
+
+  width: 100vw;
+  height: 100%;
+  position: relative;
+  background: #242424;
+  overflow: hidden;
+
+}
+
+.slider img {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  animation: fade 1s;
+
+}
+
+.slider .seta {
+  z-index: 10;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: auto;
+  right: auto;
+  width: auto;
+  height: 1.5rem;
+  font-size: 2.5em;
+  color: hsla(269, 85%, 38%, 1);
+  transition: transform 0.5s;
+}
+
+.slider .seta:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: transform 0.5;
+}
+
+.slider .arrow-left {
+  left: 2%;
+}
+
+.slider .arrow-right {
+  right: 2%;
+}
+
+.slider .paginacao {
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+  padding: 6px 6px; /* Espaçamento interno */
+  border-radius: 20px; /* Bordas arredondadas */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra suave */
+}
+
+.slider .paginacao .botao {
+ width: auto;
+ height: auto;
+ display: inline-flex;
+ align-content: center;
+ justify-content: center;
+ color: hsla(269, 85%, 38%, 1);
+}
+
+i.far.fa-circle.fa-dot-circle, i.far.fa-dot-circle {
+  color: hsla(120, 61%, 50%, 1);
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*================ SEÇÃO 4 =================*/
+/* Estilo geral da seção */
+#destaques-jogos {
+  padding: 50px 0;
+  background-color: hsla(269, 85%, 38%, 1); /* Cor roxa da seção 3 */
+  position: relative; /* Para posicionar o gamepad em relação à seção */
+}
+
+/* Título da seção com efeito de texto vazado */
+#destaques-jogos h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  position: relative;
+  z-index: 2; /* Garante que o título fique acima do gamepad */
+  background: linear-gradient(to right, #ffffff, #ff9a9e); /* Adicionando o gradiente de cor para o efeito de texto vazado */
+  -webkit-background-clip: text; /* Necessário para alguns navegadores */
+  color: transparent; /* Torna o texto transparente */
+  padding-bottom: 10px;
+}
+
+/* Gamepad como fundo */
+#destaques-jogos .gamepad-background {
+  position: absolute;
+  left: 20px; /* Posição à esquerda */
+  top: 20px; /* Distância do topo */
+  z-index: 1; /* Coloca o gamepad atrás do conteúdo */
+  width: 150px; /* Tamanho considerável do controle */
+  height: 150px; /* Tamanho considerável do controle */
+  background-image: url('/assets/img/section-4/gamepad-controler.png'); /* Caminho da imagem */
+  background-size: contain; /* Ajusta a imagem para o tamanho */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Grade de jogos */
+.grid-container-section-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 10px;
+  justify-items: center;
+  padding: 0 10px;
+  position: relative; /* Para garantir que o conteúdo da grade fique acima do gamepad */
+  z-index: 2; /* Coloca a grade de jogos acima do gamepad */
+}
+
+/* Itens da grade */
+.grid-item {
+  text-align: center;
+}
+
+/* Wrapper do jogo */
+.game-wrapper {
+  position: relative;
+  width: 60px; /* Tamanho base */
+  height: 60px; /* Tamanho base */
+  transition: transform 0.3s ease;
+}
+
+.game-wrapper:hover {
+  transform: scale(1.1); /* Efeito ao passar o mouse */
+}
+
+/* Estilo da imagem do jogo */
+.game-image {
+  width: 60px; /* Tamanho da imagem */
+  height: 60px; /* Tamanho da imagem */
+  background-color: #ececec;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+/* Estilo do título do jogo */
+.game-title {
+  margin-top: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  max-width: 40px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  justify-self: center;
+}
+
+/* Estilo do link "Ver Tudo" */
+.view-all-text {
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  text-align: right;
+  display: block;
+  padding: 10px 14px;
+  font-size: 12px;
+  justify-self: right;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.view-all-text:hover {
+  color: var(--first-color); /* Cor de hover, se desejar mudar */
+}
+
+/* Emblema do ranking */
+.game-rank {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--first-color);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: 5px 0 5px 0;
+  z-index: 2;
+  transform-origin: top left; /* Garante o crescimento proporcional */
+}
+
+
+/*============ BARRA DE PESQUISA ============*/
+.form button {
+  border: none;
+  background: none;
+  color: #8b8ba7;
+}
+/* styling of whole input container */
+.form {
+  --timing: 0.3s;
+  --width-of-input: 80%;
+  --height-of-input: 40px;
+  --border-height: 2px;
+  --input-bg: hsla(228, 100%, 99%);
+  --border-radius: 30px;
+  --after-border-radius: 4px;
+  position: relative;
+  top: -50px;
+  margin-bottom: -30px;
+  width: var(--width-of-input);
+  height: var(--height-of-input);
+  display: flex;
+  align-items: center;
+  padding-inline: 0.8em;
+  border-radius: var(--border-radius);
+  transition: border-radius 0.5s ease;
+  background: var(--body-color);
+  border: 1px solid;
+  justify-self: center;
+}
+/* styling of Input */
+.input {
+  font-size: 0.9rem;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  padding-inline: 0.5em;
+  padding-block: 0.7em;
+  border: none;
+  color: var(--text-color);
+  caret-color: hsla(269, 85%, 38%, 1);
+}
+/* styling of animated border */
+.form:before {
+  content: "";
+  position: absolute;
+  background: var(--search-bar-border-color);
+  transform: scaleX(0);
+  transform-origin: center;
+  width: 100%;
+  height: var(--border-height);
+  left: 0;
+  bottom: 0;
+  border-radius: 1px;
+  transition: transform var(--timing) ease;
+}
+/* Hover on Input */
+.form:focus-within {
+  border-radius: var(--after-border-radius);
+  border: 1px solid var(--search-bar-border-color) ;
+}
+
+input:focus {
+  outline: none;
+}
+/* here is code of animated border */
+.form:focus-within:before {
+  transform: scale(1);
+}
+/* styling of close button */
+/* == you can click the close button to remove text == */
+.reset {
+  border: none;
+  background: none;
+  opacity: 0;
+  visibility: hidden;
+}
+/* close button shown when typing */
+input:not(:placeholder-shown) ~ .reset {
+  opacity: 1;
+  visibility: visible;
+}
+/* sizing svg icons */
+.form svg {
+  width: 17px;
+  margin-top: 3px;
+}
+
+
+/*============ Frase de Destaque ============*/
+
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.hero-title {
+  font-family: 'Inter', sans-serif !important; 
+  font-size: 2.1em;
+  font-weight: bold;
+  color: var(--hero-title-color); /* Cor do texto principal */
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-family: 'Inter', sans-serif !important;
+  font-size: .9em;
+  color: var(--hero-subtitle-color); /* Cor do texto secundário */
+  margin-bottom: 30px;
+}
+
+/*=========== BOTÃO COMECE AGORA ============*/
+
+.animated-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px; /* Reduz o espaço entre ícones e texto */
+  padding: 8px 25px; /* Diminui o preenchimento interno do botão */
+  border: 3px solid; /* Ajusta a largura da borda */
+  border-color: transparent;
+  font-size: 12px; /* Reduz o tamanho da fonte */
+  background-color: var(--animated-button-background-color);
+  border-radius: 50px; /* Mantém as bordas arredondadas */
+  font-weight: 600;
+  color: hsla(120, 61%, 50%, 1);
+  box-shadow: 0 0 0 1px hsla(120, 61%, 50%, 1); /* Diminui o tamanho da sombra */
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  margin-bottom: 0px;
+  justify-self: center;
+}
+
+.animated-button svg {
+  position: absolute;
+  width: 16px; /* Reduz o tamanho do ícone */
+  fill: hsla(120, 61%, 50%, 1);
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .arr-1 {
+  right: 10px; /* Ajusta a posição do ícone */
+}
+
+.animated-button .arr-2 {
+  left: -15%; /* Ajusta a posição inicial do segundo ícone */
+}
+
+.animated-button .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15px; /* Reduz o tamanho do círculo inicial */
+  height: 15px;
+  background-color: hsla(120, 61%, 50%, 1);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-8px); /* Ajusta o deslocamento do texto */
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button:hover {
+  box-shadow: 0 0 0 8px transparent; /* Reduz a expansão da sombra */
+  color: #fff;
+  border-radius: 8px; /* Ajusta a borda arredondada ao diminuir */
+  border-color: var(--animated-button-hover-border-color);
+}
+
+.animated-button:hover .arr-1 {
+  right: -20%; /* Ajusta a movimentação do ícone */
+}
+
+.animated-button:hover .arr-2 {
+  left: 10px; /* Ajusta a posição do segundo ícone */
+}
+
+.animated-button:hover .text {
+  transform: translateX(8px); /* Ajusta o deslocamento do texto */
+}
+
+.animated-button:hover svg {
+  fill: #fff;
+}
+
+.animated-button:active {
+  scale: 0.9; /* Ajusta o efeito de clique */
+  box-shadow: 0 0 0 2px hsla(120, 61%, 50%, 1); /* Reduz o tamanho da sombra ativa */
+}
+
+.animated-button:hover .circle {
+  width: 150px; /* Reduz o tamanho do círculo ao passar o mouse */
+  height: 150px;
+  opacity: 1;
+}
