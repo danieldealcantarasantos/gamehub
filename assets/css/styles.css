@@ -582,27 +582,54 @@ i.far.fa-circle.fa-dot-circle, i.far.fa-dot-circle {
   position: relative; /* Para posicionar o gamepad em relação à seção */
 }
 
-/* Título da seção com efeito de texto vazado */
-#destaques-jogos h2 {
-  text-align: center;
-  font-size: 2rem;
+/* Estilo do título com texto sólido */
+.text-sólido {
+  position: absolute; /* Usando absolute para garantir que ambos fiquem na mesma posição */
+  top: 10%; /* Centraliza verticalmente */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta para garantir o centro exato */
+  font-size: 2rem; /* Tamanho ajustado para 2rem */
   font-weight: bold;
-  position: relative;
-  z-index: 2; /* Garante que o título fique acima do gamepad */
-  background: linear-gradient(to right, #ffffff, #ff9a9e); /* Adicionando o gradiente de cor para o efeito de texto vazado */
-  -webkit-background-clip: text; /* Necessário para alguns navegadores */
-  color: transparent; /* Torna o texto transparente */
-  padding-bottom: 10px;
+  display: inline-block;
+  color: #fff; /* Texto sólido em branco */
+  z-index: 2; /* O texto sólido deve estar acima do gamepad */
+  white-space: nowrap; /* Impede a quebra de linha */
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
-/* Gamepad como fundo */
-#destaques-jogos .gamepad-background {
+/* Estilo do título com texto vazado */
+.text-vazado {
+  position: absolute; /* Usando absolute para garantir que ambos fiquem na mesma posição */
+  top: 10%; /* Inicialmente abaixo do título sólido (ajuste conforme necessário) */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta para garantir o centro exato */
+  font-size: 2rem; /* Tamanho ajustado para 2rem */
+  font-weight: bold;
+  display: inline-block;
+  color: transparent; /* Torna o texto transparente */
+  z-index: 3; /* O texto vazado deve ficar abaixo do gamepad */
+  white-space: nowrap; /* Impede a quebra de linha */
+  
+  /* Adicionando o contorno no texto */
+  -webkit-text-stroke: 2px #fff; /* Contorno do texto (branco, 2px de espessura) */
+  
+  /* Fazendo o fundo transparente e o texto vazio para criar o efeito vazado */
+  -webkit-background-clip: text; /* Faz com que o fundo se aplique ao texto */
+  background-color: transparent; /* Fundo transparente */
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+/* Estilo para o gamepad como fundo */
+.gamepad-background {
   position: absolute;
-  left: 20px; /* Posição à esquerda */
-  top: 20px; /* Distância do topo */
-  z-index: 1; /* Coloca o gamepad atrás do conteúdo */
-  width: 150px; /* Tamanho considerável do controle */
-  height: 150px; /* Tamanho considerável do controle */
+  top: 20%; /* Coloca o gamepad acima do título sólido */
+  left: 33%; /* Centraliza horizontalmente */
+  transform: translate(-50%, -50%); /* Ajuste para garantir o centro exato */
+  z-index: 2; /* Coloca o gamepad entre os dois títulos */
+  width: 140px; /* Tamanho considerável do controle */
+  height: 140px; /* Tamanho considerável do controle */
   background-image: url('/gamehub/assets/img/section-4/gamepad-controler.png'); /* Caminho da imagem */
   background-size: contain; /* Ajusta a imagem para o tamanho */
   background-repeat: no-repeat;
