@@ -592,7 +592,7 @@ i.far.fa-circle.fa-dot-circle, i.far.fa-dot-circle {
   font-weight: bold;
   display: inline-block;
   color: #fff; /* Texto sólido em branco */
-  z-index: 2; /* O texto sólido deve estar acima do gamepad */
+  z-index: 1; /* O texto sólido deve estar acima do gamepad */
   white-space: nowrap; /* Impede a quebra de linha */
   margin-bottom: 20px;
   margin-top: 10px;
